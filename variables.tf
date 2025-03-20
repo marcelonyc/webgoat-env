@@ -25,6 +25,6 @@ variable "REPO_LIST_FILE" {
   type = string
 }
 
-variable "BE_FQDN{
+variable "BE_FQDN" {
   type = string
 }
