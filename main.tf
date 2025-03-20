@@ -3,7 +3,7 @@ terraform {
         hostname = "${{ var.BE_FQDN }}"
         organization = "tf-repo-manager-be"
         workspaces {
-            name = "example-tf-module-ws"
+            name = "webgoat-tf-module-ws"
         }
     }
 }
