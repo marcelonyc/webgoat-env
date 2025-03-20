@@ -67,8 +67,9 @@ jobs:
 
         - name: JFrog Build
           run: |
-            jf rt build-add-git ${{ env.JF_BUILD_NAME }} ${{ env.JF_BUILD_NUMBER }}
-            jf rt build-collect-env ${{ env.JF_BUILD_NAME }} ${{ env.JF_BUILD_NUMBER }}
+            jf rt build-add-dependencies .           
+            jf rt build-add-git 
+            jf rt build-collect-env 
             jf rt build-add-dependencies --from-rt tf-repo-manager-module/jfrog/soleng/demorepos/v1.0.zip
-            jf rt build-publish ${{ env.JF_BUILD_NAME }} ${{ env.JF_BUILD_NUMBER }} --url ${{ vars.JF_URL }} --build-name ${{ env.JF_BUILD_NAME }} --build-number ${{ env.JF_BUILD_NUMBER }}
+            jf rt build-publish
             
