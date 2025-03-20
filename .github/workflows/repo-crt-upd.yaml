@@ -4,11 +4,6 @@ on: workflow_dispatch
 
 env:
   OIDC_PROVIDER_NAME: ${{ vars.OIDC_PROVIDER_NAME }}
-  DOCKER_REPO: ${{ vars.DOCKER_REPO }}
-  DOCKER_REMOTE: ${{ vars.DOCKER_REMOTE }}
-  PYTHON_REMOTE_REPO: ${{ vars.PYTHON_REMOTE_REPO }}
-  DEBIAN_REMOTE_REPO: ${{ vars.DEBIAN_REMOTE_REPO }}
-  IMAGE_NAME: '${{ vars.IMAGE_NAME }}:${{ github.run_number }}'
   JF_URL: https://${{ vars.JF_URL }}/
   JF_BUILD_NAME: 'web-goat-terraform'
   JF_BUILD_NUMBER: ${{ github.run_number }}  
@@ -38,21 +33,27 @@ jobs:
           with:
             oidc-provider-name: ${{ env.OIDC_PROVIDER_NAME }}
 
+        - name: Setup HCL credentials
+          run: |
+            mkdir -p ~/.terraform.d
+            echo "credentials {
+            ${{ vars.BE_FQDN }}: {
+              token: ${{ steps.setup-cli.outputs.oidc-token }}
+            }" > ~/.terraform.d/credentials.tfrc.json
+
         # Step 4: Initialize Terraform
         - name: Terraform Init
-          run: terraform init -backend-config="address=${{ env.TERRAFORM_BACKEND_ADDRESS }}" \
-            -backend-config="username=${{ steps.setup-cli.outputs.oidc-user }}" \
-            -backend-config="password=${{ steps.setup-cli.outputs.oidc-token }}"
+          run: terraform init
             
         # Step 5: Apply Terraform
         - name: Terraform Apply
           run: terraform apply -auto-approve
           env:
             TF_VAR_JFROG_ACCESS_TOKEN_CI_INSTANCE: ${{ steps.setup-cli.outputs.oidc-token }}
-            TF_VAR_JFROG_URL_CI_INSTANCE: ${{ env.JFROG_URL_CI_INSTANCE }}
+            TF_VAR_JFROG_URL_CI_INSTANCE: ${{ vars.JFROG_URL_CI_INSTANCE }}
             TF_VAR_JFROG_ACCESS_TOKEN_CD_INSTANCE: ${{ steps.setup-cli.outputs.oidc-token }}
-            TF_VAR_JFROG_URL_CD_INSTANCE: ${{ env.JFROG_URL_CD_INSTANCE }}
+            TF_VAR_JFROG_URL_CD_INSTANCE: ${{ vars.JFROG_URL_CD_INSTANCE }}
             TF_VAR_JFROG_ACCESS_TOKEN_EDGE: ${{ steps.setup-cli.outputs.oidc-token }}
-            TF_VAR_JFROG_URL_EDGE: ${{ env.JFROG_URL_EDGE }}
+            TF_VAR_JFROG_URL_EDGE: ${{ vars.JFROG_URL_EDGE }}
             TF_API_TOKEN: ${{ steps.setup-cli.outputs.oidc-token }}
             
