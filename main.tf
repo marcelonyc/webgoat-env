@@ -18,6 +18,5 @@ module "demo-module" {
   JFROG_URL_CI_INSTANCE = var.JFROG_URL_CI_INSTANCE
   JFROG_URL_EDGE = var.JFROG_URL_EDGE
   REPO_LIST_FILE = var.REPO_LIST_FILE
-
   
 } 

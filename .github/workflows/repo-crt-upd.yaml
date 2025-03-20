@@ -61,6 +61,6 @@ jobs:
             TF_VAR_JFROG_ACCESS_TOKEN_EDGE: ${{ steps.setup-cli.outputs.oidc-token }}
             TF_VAR_JFROG_URL_EDGE: ${{ vars.JFROG_URL_EDGE }}
             TF_API_TOKEN: ${{ steps.setup-cli.outputs.oidc-token }}
-            BE_FQDN: ${{ vars.BE_FQDN }}
+            TF_VAR_BE_FQDN: ${{ vars.BE_FQDN }}
             OIDC_PROVIDER_NAME: ${{ vars.OIDC_PROVIDER_NAME }}
             
