@@ -1,6 +1,6 @@
 terraform {
   backend "remote" {
-        hostname = "${{ var.BE_FQDN }}"
+        hostname = ${{ var.BE_FQDN }}
         organization = "tf-repo-manager-be"
         workspaces {
             name = "webgoat-tf-module-ws"
