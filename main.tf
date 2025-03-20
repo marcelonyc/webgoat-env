@@ -1,6 +1,6 @@
 terraform {
   backend "remote" {
-        hostname = var.BE_FQDN 
+        hostname = "mdlone.jfrog.io" 
         organization = "tf-repo-manager-be"
         workspaces {
             name = "webgoat-tf-module-ws"
