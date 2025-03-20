@@ -39,10 +39,12 @@ jobs:
         - name: Setup HCL credentials
           run: |
             mkdir -p ~/.terraform.d
-            echo "credentials {
-            ${{ vars.BE_FQDN }}: {
-              token: ${{ steps.setup-cli.outputs.oidc-token }}
-            }" > ~/.terraform.d/credentials.tfrc.json
+            echo "{
+            \"credentials\": {
+            \"${{ vars.BE_FQDN }}\": {
+              \"token\": \"${{ steps.setup-cli.outputs.oidc-token }}\"
+            }
+              }" > ~/.terraform.d/credentials.tfrc.json
 
         # Step 4: Initialize Terraform
         - name: Terraform Init

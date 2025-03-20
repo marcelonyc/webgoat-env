@@ -7,6 +7,7 @@ terraform {
         }
     }
 }
+
 module "demo-module" {
   source = "mdlone.jfrog.io/tf-repo-manager-module__jfrog/soleng/demorepos"
   version = "v1.0"
