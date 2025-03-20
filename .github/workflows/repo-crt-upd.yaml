@@ -52,7 +52,7 @@ jobs:
             
         # Step 5: Apply Terraform
         - name: Terraform Apply
-          run: terraform apply -auto-approve
+          run: terraform destroy -auto-approve
           env:
             TF_VAR_JFROG_ACCESS_TOKEN_CI_INSTANCE: ${{ steps.setup-cli.outputs.oidc-token }}
             TF_VAR_JFROG_URL_CI_INSTANCE: ${{ vars.JFROG_URL_CI_INSTANCE }}
