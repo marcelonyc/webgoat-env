@@ -43,7 +43,7 @@ jobs:
             \"credentials\": {
             \"${{ vars.BE_FQDN }}\": {
               \"token\": \"${{ steps.setup-cli.outputs.oidc-token }}\"
-            }
+            }}
               }" > ~/.terraform.d/credentials.tfrc.json
 
         # Step 4: Initialize Terraform
