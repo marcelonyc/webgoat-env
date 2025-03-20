@@ -2,6 +2,9 @@ name: Terraform Apply
 
 on: workflow_dispatch
 
+permissions:
+  id-token: write # This is required for requesting the JWT   
+  
 env:
   OIDC_PROVIDER_NAME: ${{ vars.OIDC_PROVIDER_NAME }}
   JF_URL: https://${{ vars.JF_URL }}/
